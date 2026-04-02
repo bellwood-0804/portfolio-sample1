@@ -1,5 +1,3 @@
-# databaseを直接操作するファイル
-
 import mysql.connector
 import time
 from werkzeug.security import generate_password_hash
@@ -12,7 +10,6 @@ def get_conn():
     for _ in range(10): 
         try:
             return mysql.connector.connect(
-                # 左側は変えてはいけない　右側は任意
                 host="db",
                 user="user",
                 password="pass",

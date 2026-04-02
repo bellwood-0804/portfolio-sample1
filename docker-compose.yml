@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    # volumes:
+    #     - ./app:/app  
+    depends_on:
+      - db
+
+  db:
+  # dbはサーバ名だから、sql起動時ホスト名になる
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shift_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      # データベースの内容をマウントするもの
+    volumes:
+         - db_data:/var/lib/mysql
+    ports:
+      - "3307:3307"
+volumes:
+  db_data:    # 永続化用ボリューム
